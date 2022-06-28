@@ -1,0 +1,40 @@
+[{
+    "id": 1,
+    "name": "navigate",
+    "url": "https://app.universaltennis.com/login",
+    "selector": "",
+    "value": "",
+    "required": ["url"]
+},
+{
+    "id": 2,
+    "name": "setValue",
+    "url": "",
+    "selector": "#emailInput",
+    "value": "emigiusto@gmail.com",
+    "required": ["selector","value"]
+},
+{
+    "id": 3,
+    "name": "setValue",
+    "url": "",
+    "selector": "#passwordInput",
+    "value": "Emigiusto37075678",
+    "required": ["selector","value"]
+},
+{
+    "id": 4,
+    "name": "click",
+    "url": "",
+    "selector": "button.btn",
+    "value": "",
+    "required": ["selector"]
+},
+{
+    "id": 5,
+    "name": "waitUntil",
+    "url": "",
+    "selector": "div.dashboardPage__ratingWrapper__1tFX3",
+    "value": "",
+    "required": ["selector"]
+}]

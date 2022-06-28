@@ -1,0 +1,29 @@
+{
+    "sequence": [
+        [
+            "navigate",
+            "",
+            "https://employeewebsite.kawarthalakes.ca/login.aspx"
+        ],
+        [
+            "setValue",
+            "#username",
+            "cludo@esolutionsgroup.ca"
+        ],
+        [
+            "setValue",
+            "#password",
+            "asdfasdfas"
+        ],
+        [
+            "click",
+            "button.btn-primary",
+            ""
+        ],
+        [
+            "waitUntil",
+            "#mainContent",
+            ""
+        ]
+    ]
+}

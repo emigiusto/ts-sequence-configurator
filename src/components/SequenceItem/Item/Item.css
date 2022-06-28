@@ -1,0 +1,49 @@
+.sequence-item span{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sequence-item_box{
+    cursor: pointer;
+    position: relative;
+    padding: 8px !important;
+    border-top: 1px solid rgba(128, 128, 128, 0.282);
+}
+
+.sequence-item[valid="false"] .sequence-item_box{
+    border: 1px solid red;
+}
+
+.sequence-item_box::after {
+    content: "\2192";
+    position: absolute;
+    right:-30px;
+    font-size:22px;
+}
+.sequence-grid-item:last-child > div > div::after {
+    content: "";
+}
+
+.sequence-item_more-inputs{
+    padding: 8px;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-radius: 0px 0px 8px 8px;
+    border-color: rgba(0, 0, 0, 0.23);
+    background-color: rgba(128, 128, 128, 0.04);
+}
+
+.sequence-item_more-inputs input{
+    background-color:white;
+    font-size: 13px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .sequence-item_box::after {
+        content: "\2193";
+        right: 47%;
+        top:105%;
+    }
+}

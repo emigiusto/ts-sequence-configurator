@@ -1,0 +1,114 @@
+.tester{
+    position: sticky;
+    margin: 30px;
+    left: 10vw;
+    top:10vh;
+    width: 75vw;
+    height: -webkit-fill-available;
+    overflow-y: auto;
+    overflow-y:scroll;
+}
+.tester-image-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: space-around;
+    padding: 14px;
+    text-align: center;
+}
+.tester-image-container h4{
+    font-size: 24px;
+    margin: 20px 0 20px 0;
+}
+.tester-image-container p{
+    font-size: 20px;
+}
+.tester-image-container img{
+    max-width: 100%;
+    margin: auto;
+    border: 1px solid grey;
+}
+
+/* LOADER STYLES */
+.loader-container p {
+    font-family: 'Montserrat Alternates',
+        sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    margin-top: 60px;
+}
+
+.loader-container span {
+    font-size: 18px;
+
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+.loader {
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    margin-top: 100px;
+    padding: 0px;
+    opacity: 0.5;
+    border: 3px solid #09acfd;
+    -webkit-animation: loader 1s ease-in-out infinite alternate;
+    animation: loader 1s ease-in-out infinite alternate;
+}
+
+.loader:before {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 3px solid #09acfd;
+}
+
+.loader:after {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 3px solid #09acfd;
+}
+
+@keyframes loader {
+    from {
+        transform: rotate(0deg) scale(1, 1);
+        border-radius: 0px;
+    }
+
+    to {
+        transform: rotate(360deg) scale(0, 0);
+        border-radius: 50px;
+    }
+}
+
+@-webkit-keyframes loader {
+    from {
+        -webkit-transform: rotate(0deg) scale(1, 1);
+        border-radius: 0px;
+    }
+
+    to {
+        -webkit-transform: rotate(360deg) scale(0, 0);
+        border-radius: 50px;
+    }
+}
+
+
