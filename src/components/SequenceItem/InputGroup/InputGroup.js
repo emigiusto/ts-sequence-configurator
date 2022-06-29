@@ -14,7 +14,7 @@ function InputGroup({name, seqItem, updateSequence}) {
         case "navigate":
             return (<form className='sequence-item_more-inputs'>
                         <TextField  label="URL" 
-                                placeholder="www.example.com/login" 
+                                placeholder="https://www.example.com/" 
                                 name="url" fullWidth 
                                 onChange={handleOnChange} 
                                 value={seqItem.url}

@@ -28,6 +28,7 @@ function App() {
   const [idCount, setIdCount] = useState(5);
   const [testModalOpen, setTestModalOpen] = useState(false);
   const [screenshot, setScreenshot] = useState({});
+  const [eventLog, setEventLog] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [defaultDelay, setDefaultDelay] = useState(30);
 
@@ -69,23 +70,21 @@ function App() {
 
   const testSequence = async () => {
     setErrorMessage("")
-    const requestBody = {
-                          sequence: sequenceConverter(seqList)
-                        }
-                      console.log(requestBody)
+    setEventLog([])
+    const requestBody = { sequence: sequenceConverter(seqList) }
+
     fetch('http://localhost:3005/screenshot?delay='+ (defaultDelay*1000),
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
       .then(response => response.json())
       .then(data => {
-        if (data.screenshot) {
-          setScreenshot(data.screenshot)
-        } else {
-          setErrorMessage("Screenshot of the test sequence is not available")
-        }
+        console.log(data)
+        setEventLog(data.log)
+        setScreenshot(data.screenshot)
+        setErrorMessage(data.error)
       }
       ).catch(err => {
         console.log(err)
-        console.log("WebRenderService might not be available")
+        console.log("WebRenderService might not be available")  
         setErrorMessage("WebRenderService might not be available or timeout exceeded")
       })
   };
@@ -101,7 +100,6 @@ function App() {
           <EventContainer addSequence={addSequence} idCount={idCount}></EventContainer>
         </Grid>
       </Grid>
-
       <ButtonGroup
           testSequence={testSequence}
           setTestModalOpen={setTestModalOpen}
@@ -113,7 +111,12 @@ function App() {
           copyToClipboard={copyToClipboard}
       ></ButtonGroup>
       <ResultContainer seqList={seqList}></ResultContainer>
-      <Tester testModalOpen={testModalOpen} screenshot={screenshot} setTestModalOpen={setTestModalOpen} errorMessage={errorMessage}></Tester>
+      <Tester testModalOpen={testModalOpen} 
+              screenshot={screenshot} 
+              setTestModalOpen={setTestModalOpen} 
+              errorMessage={errorMessage}
+              eventLog={eventLog}>
+      </Tester>
     </div>
   );
 }

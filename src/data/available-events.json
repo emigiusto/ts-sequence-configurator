@@ -14,5 +14,9 @@
     {
         "name": "waitUntil",
         "required": ["selector"]
+    },
+    {
+        "name": "submit",
+        "required": ["selector"]
     }
 ]

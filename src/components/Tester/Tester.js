@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
 //MU
-import { Backdrop, Box, Modal, Fade } from '@mui/material';
+import { Backdrop, Box, Modal, Fade, Typography } from '@mui/material';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import ErrorIcon from '@mui/icons-material/Error';
 
 //Custom Styles
 import './Tester.css'
@@ -13,7 +15,7 @@ const style = {
     p: 4,
 };
 
-export default function Tester({ testModalOpen, screenshot, setTestModalOpen,errorMessage}) {
+export default function Tester({ testModalOpen, screenshot, eventLog, setTestModalOpen, errorMessage }) {
     const [loader, setLoader] = useState(true);
     const handleClose = () => setTestModalOpen(false);
 
@@ -42,15 +44,35 @@ export default function Tester({ testModalOpen, screenshot, setTestModalOpen,err
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
-                }}
-            >
+                }}>
                 <Fade in={testModalOpen}>
                     <Box sx={style} className="tester">
                         {errorMessage ? 
                             <div className="tester-image-container">
-                                <h4>Error!</h4>
-                                <p>Message: {errorMessage}.</p>
-                                <p>Please try again</p>
+                                <Typography variant='h5' mb={4} >Error!</Typography>
+                                <code className="error-message">{errorMessage}</code>
+                                { //Renders log events
+                                    eventLog ? 
+                                        <><Typography variant='h6' className='event-log-title' mt={4}>Event log:</Typography>
+                                        <ul className="event-log-list"> 
+                                            {eventLog.map((step, i, elog) => {
+                                                if (i+1 === elog.length) {
+                                                    return(
+                                                        <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
+                                                            <code >{JSON.stringify(step)}</code>
+                                                            <ErrorIcon style={{float: "right"}}></ErrorIcon>
+                                                        </li>)
+                                                } else {
+                                                    return(
+                                                        <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
+                                                            <code >{JSON.stringify(step)}</code>
+                                                            <AssignmentTurnedInIcon style={{float: "right"}}></AssignmentTurnedInIcon>
+                                                        </li>)
+                                                }
+                                                
+                                            })}
+                                        </ul></> : null
+                                }
                             </div>
                             :
                                 (loader ?
