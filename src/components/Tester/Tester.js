@@ -47,50 +47,46 @@ export default function Tester({ testModalOpen, screenshot, eventLog, setTestMod
                 }}>
                 <Fade in={testModalOpen}>
                     <Box sx={style} className="tester">
-                        {errorMessage ? 
-                            <div className="tester-image-container">
-                                <Typography variant='h5' mb={4} >Error!</Typography>
-                                <code className="error-message">{errorMessage}</code>
-                                { //Renders log events
-                                    eventLog ? 
-                                        <><Typography variant='h6' className='event-log-title' mt={4}>Event log:</Typography>
-                                        <ul className="event-log-list"> 
-                                            {eventLog.map((step, i, elog) => {
-                                                if (i+1 === elog.length) {
-                                                    return(
-                                                        <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
-                                                            <code >{JSON.stringify(step)}</code>
-                                                            <ErrorIcon style={{float: "right"}}></ErrorIcon>
-                                                        </li>)
-                                                } else {
-                                                    return(
-                                                        <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
-                                                            <code >{JSON.stringify(step)}</code>
-                                                            <AssignmentTurnedInIcon style={{float: "right"}}></AssignmentTurnedInIcon>
-                                                        </li>)
-                                                }
-                                                
-                                            })}
-                                        </ul></> : null
-                                }
-                            </div>
+                            {!loader ? 
+                                <div className="tester-image-container">
+                                    {errorMessage   ? (<div className='title-container'><Typography variant='h5' mr={6} >Error!</Typography><img src='/icons/cancel-40.png' alt="cancel-icon" className='tester-icon'></img></div>)
+                                                    : (<div className='title-container'><Typography variant='h5' mr={6} >Success!</Typography><img src='/icons/done-40.png' alt="done-icon" className='tester-icon'></img></div>)}
+                                    
+                                    <code className="error-message">{errorMessage}</code>
+                                    {screenshot ?
+                                        (<><Typography variant='body2' mt={4} mb={3} align={'left'}>Screenshot of the last screen:</Typography>
+                                        <img src={'data:image/png;base64,'+ screenshot} alt="tool-screenshot" className="tester-image"/></>) : null
+                                    }
+                                    { //Renders log events
+                                        eventLog ? 
+                                            <><Typography variant='h6' className='event-log-title' mt={4}>Event log:</Typography>
+                                            <ul className="event-log-list"> 
+                                                {eventLog.map((step, i, elog) => {
+                                                    if (i+1 === elog.length && errorMessage) {
+                                                        return(
+                                                            <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
+                                                                <code >{JSON.stringify(step)}</code>
+                                                                <ErrorIcon style={{float: "right"}}></ErrorIcon>
+                                                            </li>)
+                                                    } else {
+                                                        return(
+                                                            <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
+                                                                <code >{JSON.stringify(step)}</code>
+                                                                <AssignmentTurnedInIcon style={{float: "right"}}></AssignmentTurnedInIcon>
+                                                            </li>)
+                                                    }
+                                                    
+                                                })}
+                                            </ul></> : null         
+                                    }
+                                </div>
                             :
-                                (loader ?
-                                <div className="loader-container">
+                            (<div className="loader-container">
                                         <p>Loading...</p>
                                         <span>This process may take up to 30 seconds</span>
                                         <div className="loader"></div>
-                                </div>
-                                :
-                                <div className="tester-image-container">
-                                    <h4>Success!</h4>
-                                    <p>The sequence has been executed. This is an screenshot of the last screen:</p>
-                                    <img 
-                                        src={'data:image/png;base64,'+ screenshot} 
-                                        alt={"tool-screenshot"}
-                                        className="tester-image"/>
                                 </div>)
-                        }
+                            }
                     </Box>
                 </Fade>
             </Modal>

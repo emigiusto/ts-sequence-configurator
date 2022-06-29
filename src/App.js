@@ -77,7 +77,6 @@ function App() {
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setEventLog(data.log)
         setScreenshot(data.screenshot)
         setErrorMessage(data.error)
