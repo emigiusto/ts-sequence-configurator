@@ -48,7 +48,7 @@ function App() {
   }
 
   const updateSequence = (newSeq) => {
-    let newList = seqList.map(seq => seq.id === newSeq.id ? newSeq : seq)
+    let newList = seqList.map(seq => seq.id === newSeq.id ? newSeq : seq) //In-order replacement
     setSeqList(newList)
   }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Custom components
-import SequenceItem from "../SequenceItem/SequenceItem";
+import Item from "./Item/Item";
 
 //MU
 import { Typography, Paper, Grid, Box } from '@mui/material';
@@ -22,12 +22,12 @@ function SequenceContainer({removeSequence,updateSequence,seqList}) {
                         justifyContent="flex-start"
                         className='sequence-grid-container'>
                         {seqList.map(seq => {
-                            return <SequenceItem 
+                            return <Item 
                                         key={seq.id}
                                         removeSequence={removeSequence}
                                         updateSequence={updateSequence}
-                                        seqItem={seq}
-                                    ></SequenceItem>
+                                        seqItem={seq}>
+                                    </Item>
                         })}
                     </Grid>
                 </Paper>
