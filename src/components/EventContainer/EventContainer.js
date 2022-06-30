@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Custom components
-import Event from "../Event/Event";
+import Event from "./Event/Event";
 
 //MU
 import { Typography, Box, Stack, Paper } from '@mui/material';
