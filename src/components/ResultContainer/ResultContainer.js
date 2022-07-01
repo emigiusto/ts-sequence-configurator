@@ -3,7 +3,7 @@ import React from 'react'
 //MU
 import { Typography, Box, Paper } from '@mui/material';
 
-function EventContainer({seqList}) {
+function ResultContainer({seqList}) {
     return (
         <div>
             <Typography variant="h6" align="left" mt={4}>Resulting sequence</Typography>
@@ -28,4 +28,4 @@ function EventContainer({seqList}) {
     )
 }
 
-export default EventContainer
+export default ResultContainer

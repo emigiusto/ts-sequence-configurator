@@ -15,7 +15,7 @@ function ButtonGroup({  testSequence,setTestModalOpen, setDefaultDelay,
     const handleTestClick = () => {
         testSequence()
         setTestModalOpen(true)
-        setScreenshot({})
+        setScreenshot("")
     }
     
     const handleCopyToClipboard = () => {
