@@ -1,4 +1,7 @@
-import React, { useState, useEffect} from 'react'
+import { useState, useEffect} from 'react'
+
+//Interfaces
+import { ISequenceItem } from '../../../interfaces'
 
 //Custom Components
 import InputGroup from '../InputGroup/InputGroup';
@@ -10,12 +13,23 @@ import CloseIcon from '@mui/icons-material/Close';
 //Custom css
 import './Item.css'
 
-function Item({seqItem,removeSequence,updateSequence}) {
-    const [valid, setValid] = useState(false);
-    const [open, setOpen] = useState(false);
+/* 
+@Josh
+Should I implement type checking in functions passed as props? Example: updateSequence, removeSequence
+If that's the case, how can I do that?
+*/
+export interface Props {
+    seqItem:  ISequenceItem
+    updateSequence: Function
+    removeSequence: Function
+}
+
+function Item({seqItem,removeSequence,updateSequence}: Props) {
+    const [valid, setValid] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        let validation = seqItem.required.every(reqSelector =>  seqItem[reqSelector])
+        let validation = seqItem.required.every((reqSelector: string) =>  seqItem[reqSelector])
         setValid(validation);
     }, [seqItem]);
 
@@ -27,28 +41,25 @@ function Item({seqItem,removeSequence,updateSequence}) {
         color: theme.palette.text.secondary,
     }));
 
-    const handleOpenClick = () =>{
+    const handleOpenClick = () => {
         setOpen(!open)
     }
 
-    const handleRemoveClick = (id) =>{
+    const handleRemoveClick = (id:number) : void =>{
         removeSequence(id)
     }
 
     return (
         <Grid item className='sequence-grid-item'  xs={12} sm={6} md={4} lg={4} >
-            <div className='sequence-item' valid={valid.toString()}>
+            <div className='sequence-item' data-valid={valid}>
                 <ItemBox className='sequence-item_box' onClick={handleOpenClick}>
                     <Typography variant="button"> {seqItem.name}</Typography>
                     <CloseIcon onClick={()=>handleRemoveClick(seqItem.id)} style={{float: "right"}}></CloseIcon>
                 </ItemBox>
                 {   open ?
                     <InputGroup name={seqItem.name}
-                                required={seqItem.required} 
                                 seqItem={seqItem} 
-                                setValid={setValid} 
-                                updateSequence={updateSequence}>
-                    </InputGroup>
+                                updateSequence={updateSequence}/>
                     : null
                 }
             </div>

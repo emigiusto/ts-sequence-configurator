@@ -1,13 +1,21 @@
-import React from 'react';
+//Interfaces
+import { ISequenceItem } from '../../../interfaces'
 
 //MU
 import TextField from '@mui/material/TextField';
 
-function InputGroup({name, seqItem, updateSequence}) {
-    const handleOnChange = (e) =>{
-        let newSeq = {...seqItem}
-        newSeq[e.target.name] = e.target.value
-        updateSequence(newSeq)
+export interface Props {
+    name: string
+    seqItem:  ISequenceItem
+    updateSequence: Function
+}
+
+function InputGroup({name, seqItem, updateSequence}:Props) {
+
+    const handleOnChange = (e: { target: { name: string; value: string; }; }) : void =>{
+        let newSeqItem:  ISequenceItem  = {...seqItem}
+        newSeqItem[e.target.name] = e.target.value
+        updateSequence(newSeqItem)
     }
 
     switch (name) {

@@ -1,39 +1,61 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 
 //MU
 import { Box ,Stack ,Button ,TextField ,Snackbar } from '@mui/material';
-import MuiAlert from '@mui/material/Alert';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 //Custom styles
-import './ButtonGroup.css';
+import './ButtonContainer.css';
 
-function ButtonGroup({  testSequence,setTestModalOpen, setDefaultDelay, 
-                        defaultDelay,clearAll,setScreenshot,copyToClipboard}) {
+export interface Props {
+    testSequence: Function,
+    setTestModalOpen: Function,
+    setDefaultDelay: Function,
+    defaultDelay: number,
+    clearAll: Function,
+    setScreenshot: Function,
+    copyToClipboard: Function
+}
 
-    const [open, setOpen] = useState(false);
+function ButtonContainer({  testSequence,setTestModalOpen, setDefaultDelay, 
+                        defaultDelay,clearAll,setScreenshot,copyToClipboard} : Props) {
 
-    const handleTestClick = () => {
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleTestClick = () : void => {
         testSequence()
         setTestModalOpen(true)
         setScreenshot("")
     }
+
+    const handleClear = () : void => {
+        clearAll()
+    }
     
-    const handleCopyToClipboard = () => {
+    const handleCopyToClipboard = (): void  => {
         setOpen(true)
         copyToClipboard()
     }
 
     //Toast handlers
-    const handleClose = (event, reason) => {
+    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false);
     };
-    const handleChange = (e) => {
-        setDefaultDelay(e.target.value)
+    const handleChange = (e: { target: { value: string; }; }) => {
+        let inputValue = parseInt(e.target.value)
+        if (inputValue>90) {
+            setDefaultDelay(90)
+            e.target.value = "90"
+        } else {
+            setDefaultDelay(inputValue)
+        }
+        
     }
-    const Alert = React.forwardRef(function Alert(props, ref) {
+
+    const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
     //End of toast handlers
@@ -50,8 +72,7 @@ function ButtonGroup({  testSequence,setTestModalOpen, setDefaultDelay,
                                 className='delay-input'/>
                         <Button variant="contained" color="secondary" onClick={handleCopyToClipboard}>Copy to Clipboard</Button>
                         <Button variant="contained" color="success" onClick={handleTestClick}>Test</Button>
-                        <Button variant="contained" onClick={clearAll} color="error">Clear All</Button>
-                        
+                        <Button variant="contained" color="error" onClick={handleClear} >Clear All</Button>
                     </Stack>
             </Box>
             {/* Toast */}
@@ -64,4 +85,4 @@ function ButtonGroup({  testSequence,setTestModalOpen, setDefaultDelay,
     )
 }
 
-export default ButtonGroup
+export default ButtonContainer

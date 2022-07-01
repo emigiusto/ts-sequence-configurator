@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
+//Interfaces
+import { ILogEvent } from '../../interfaces'
 
 //MU
 import { Backdrop, Box, Modal, Fade, Typography } from '@mui/material';
@@ -8,26 +11,32 @@ import ErrorIcon from '@mui/icons-material/Error';
 //Custom Styles
 import './Tester.css'
 
-const style = {
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+export interface Props {
+    screenshot: string,
+    testModalOpen: boolean,
+    eventLog: ILogEvent[],
+    setTestModalOpen: Function,
+    errorMessage: string
+}
 
-export default function Tester({ testModalOpen, screenshot, eventLog, setTestModalOpen, errorMessage }) {
+export default function Tester({ testModalOpen, 
+                                screenshot, 
+                                eventLog, 
+                                setTestModalOpen, 
+                                errorMessage } : Props) {
+
     const [loader, setLoader] = useState(true);
-    const handleClose = () => setTestModalOpen(false);
+    const handleClose = () => setTestModalOpen(false)
 
     useEffect(() => {
         setLoader(true)
     }, [testModalOpen]);
 
     useEffect(() => {
-        if (!(screenshot && Object.keys(screenshot).length === 0)){
+        if (!(screenshot && Object.keys(screenshot).length === 0) && errorMessage!==""){
             setLoader(false)
         }
-    }, [screenshot]);
+    }, [screenshot,errorMessage]);
 
     if(!testModalOpen){
         return(null)
@@ -46,31 +55,33 @@ export default function Tester({ testModalOpen, screenshot, eventLog, setTestMod
                     timeout: 500,
                 }}>
                 <Fade in={testModalOpen}>
-                    <Box sx={style} className="tester">
+                    <Box sx={BoxStyle} className="tester">
                             {!loader ? 
                                 <div className="tester-image-container">
                                     {errorMessage   ? (<div className='title-container'><Typography variant='h5' mr={6} >Error!</Typography><img src='/icons/cancel-40.png' alt="cancel-icon" className='tester-icon'></img></div>)
                                                     : (<div className='title-container'><Typography variant='h5' mr={6} >Success!</Typography><img src='/icons/done-40.png' alt="done-icon" className='tester-icon'></img></div>)}
                                     
                                     <code className="error-message">{errorMessage}</code>
-                                    {screenshot ?
+                                    
+                                    {//Renders screenshot if not null
+                                        screenshot ?
                                         (<><Typography variant='body2' mt={4} mb={3} align={'left'}>Screenshot of the last screen:</Typography>
-                                        <img src={'data:image/png;base64,'+ screenshot} alt="tool-screenshot" className="tester-image"/></>) : null
+                                        <img src={`data:image/png;base64,${screenshot}`} alt="tool-screenshot" className="tester-image"/></>) : null
                                     }
-                                    { //Renders log events
+                                    { //Renders log events if not null
                                         eventLog ? 
                                             <><Typography variant='h6' className='event-log-title' mt={4}>Event log:</Typography>
                                             <ul className="event-log-list"> 
-                                                {eventLog.map((step, i, elog) => {
+                                                {eventLog.map((step: ILogEvent, i:number, elog: ILogEvent[]) => {
                                                     if (i+1 === elog.length && errorMessage) {
                                                         return(
-                                                            <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
+                                                            <li key={"" + step.type + step.key} className="event-log-list_item">
                                                                 <code >{JSON.stringify(step)}</code>
                                                                 <ErrorIcon style={{float: "right"}}></ErrorIcon>
                                                             </li>)
                                                     } else {
                                                         return(
-                                                            <li key={"" + step.type + step.key} mt={3} className="event-log-list_item">
+                                                            <li key={"" + step.type + step.key} className="event-log-list_item">
                                                                 <code >{JSON.stringify(step)}</code>
                                                                 <AssignmentTurnedInIcon style={{float: "right"}}></AssignmentTurnedInIcon>
                                                             </li>)
@@ -81,6 +92,7 @@ export default function Tester({ testModalOpen, screenshot, eventLog, setTestMod
                                     }
                                 </div>
                             :
+                            /* Loader */
                             (<div className="loader-container">
                                         <p>Loading...</p>
                                         <span>This process may take up to 30 seconds</span>
@@ -93,3 +105,10 @@ export default function Tester({ testModalOpen, screenshot, eventLog, setTestMod
         </div>
     );
 }
+
+const BoxStyle = {
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};

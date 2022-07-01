@@ -1,15 +1,15 @@
 body{
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 .App{
-    width: 90%;
-    margin: auto;
+  width: 90%;
+  margin: auto;
 }
 
 /* Media Queries */
 @media only screen and (min-width: 1400px) {
-    .App{
-        width: 80%;
-    }
+  .App{
+      width: 80%;
+  }
 }

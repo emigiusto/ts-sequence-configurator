@@ -1,4 +1,5 @@
-import React from 'react'
+//Interfaces
+import { ISequenceItem } from '../../interfaces'
 
 //Custom components
 import Item from "./Item/Item";
@@ -9,7 +10,13 @@ import { Typography, Paper, Grid, Box } from '@mui/material';
 //Custom CSS
 import './SequenceContainer.css'
 
-function SequenceContainer({removeSequence,updateSequence,seqList}) {
+export interface Props {
+    seqList:  ISequenceItem[]
+    updateSequence: Function
+    removeSequence: Function
+}
+
+function SequenceContainer({removeSequence,updateSequence,seqList} : Props) {
     return (
         <div>
             <Box sx={{'& > :not(style)': {mt: 2,p: 3}}}>
@@ -21,13 +28,12 @@ function SequenceContainer({removeSequence,updateSequence,seqList}) {
                         direction="row"
                         justifyContent="flex-start"
                         className='sequence-grid-container'>
-                        {seqList.map(seq => {
+                        {seqList.map((seq: ISequenceItem) => {
                             return <Item 
                                         key={seq.id}
                                         removeSequence={removeSequence}
                                         updateSequence={updateSequence}
-                                        seqItem={seq}>
-                                    </Item>
+                                        seqItem={seq}/>
                         })}
                     </Grid>
                 </Paper>

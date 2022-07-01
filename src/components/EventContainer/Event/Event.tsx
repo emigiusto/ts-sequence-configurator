@@ -1,11 +1,17 @@
-import React from 'react'
-
+//Interfaces
+import { IEvent } from '../../../interfaces'
 //MU
 import Button from '@mui/material/Button';
 
-export default function Event({event,addSequence,idCount}) {
+export interface Props {
+    event: IEvent,
+    addSequence: Function,
+    idCount: number
+}
 
-    const handleAddEvent = (event) =>{
+export default function Event({event,addSequence,idCount}: Props) {
+
+    const handleAddEvent = (event: IEvent) : void =>{
         let newEvent = {
             ...event,
             id: idCount+1,

@@ -10,7 +10,7 @@
     border-top: 1px solid rgba(128, 128, 128, 0.282);
 }
 
-.sequence-item[valid="false"] .sequence-item_box{
+.sequence-item[data-valid = false] .sequence-item_box{
     border: 1px solid red;
 }
 

@@ -1,44 +1,47 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 //MU
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-//Custom components
-import SequenceContainer from "./components/SequenceContainer/SequenceContainer";
-import EventContainer from "./components/EventContainer/EventContainer"
-import ButtonGroup from "./components/ButtonGroup/ButtonGroup"
-import ResultContainer from "./components/ResultContainer/ResultContainer"
-import Tester from "./components/Tester/Tester"
-
 //Custom Styles
 import './App.css'
 
+//Default Sequence List
+/* import sequenceData from './data/example-sequence.json'; */
+
+import { ISequenceItem } from './interfaces'
+
+//Custom components
+import SequenceContainer from "./components/SequenceContainer/SequenceContainer";
+import EventContainer from "./components/EventContainer/EventContainer"
+import ButtonContainer from "./components/ButtonContainer/ButtonContainer"
+import ResultContainer from "./components/ResultContainer/ResultContainer"
+import Tester from "./components/Tester/Tester"
+
 //Helper Functions
 import { sequenceConverter } from "./validators/sequenceConverter";
-/* import { sequenceValidator } from "./validators/sequenceValidator"; */
 
 //Default Sequence List
-import sequenceData from './data/example-sequence.json';
+import _sequenceData from './data/example-sequence.json';
+const sequenceData = _sequenceData as ISequenceItem[];
 
 function App() {
-
-  const [seqList, setSeqList] = useState(sequenceData);
-  /* const [validatedSeq, setValidatedSeq] = useState([]); */
-  const [idCount, setIdCount] = useState(5);
-  const [testModalOpen, setTestModalOpen] = useState(false);
-  const [screenshot, setScreenshot] = useState({});
+  const [seqList, setSeqList] = useState<ISequenceItem[]>(sequenceData);
+  const [idCount, setIdCount] = useState<number>(5);
+  const [testModalOpen, setTestModalOpen] = useState<boolean>(false);
+  const [screenshot, setScreenshot] = useState<string>("");
   const [eventLog, setEventLog] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [defaultDelay, setDefaultDelay] = useState(30);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [defaultDelay, setDefaultDelay] = useState<number>(30);
 
-  const addSequence = (newSeq) => {
+  const addSequence = (newSeq: ISequenceItem) : void => {
     let newList = [...seqList, newSeq]
     setSeqList(newList)
     setIdCount(idCount + 1)
   }
 
-  const removeSequence = (SeqIDToDelete) => {
+  const removeSequence = (SeqIDToDelete: number) : void => {
     let filteredSeqList = seqList.filter(seq => seq.id !== SeqIDToDelete)
     setSeqList(filteredSeqList)
   }
@@ -47,26 +50,14 @@ function App() {
     setSeqList([])
   }
 
-  const updateSequence = (newSeq) => {
+  const updateSequence = (newSeq: ISequenceItem) : void => {
     let newList = seqList.map(seq => seq.id === newSeq.id ? newSeq : seq) //In-order replacement
     setSeqList(newList)
   }
 
-  const copyToClipboard = () => {
+  const copyToClipboard = () : void  => {
     navigator.clipboard.writeText(JSON.stringify(sequenceConverter(seqList)))
   }
-
-  //Sequence pre-validations to improve the experience?
-  /*
-    const generateSequence = () => {
-    if (sequenceValidator(seqList)) {
-      setValidatedSeq(seqList)
-    }
-  } 
-  useEffect(() => {
-    generateSequence()
-  }, [seqList]);
-  */
 
   const testSequence = async () => {
     setErrorMessage("")
@@ -83,10 +74,11 @@ function App() {
       }
       ).catch(err => {
         console.log(err)
-        console.log("WebRenderService might not be available")  
-        setErrorMessage("WebRenderService might not be available or timeout exceeded")
+        console.log("Puppeteer service might not be available")  
+        setErrorMessage("Puppeteer service might not be available")
       })
   };
+
 
   return (
     <div className="App">
@@ -99,23 +91,21 @@ function App() {
           <EventContainer addSequence={addSequence} idCount={idCount}></EventContainer>
         </Grid>
       </Grid>
-      <ButtonGroup
+      <ButtonContainer
           testSequence={testSequence}
           setTestModalOpen={setTestModalOpen}
-          screenshot={screenshot}
           setDefaultDelay={setDefaultDelay}
           defaultDelay={defaultDelay}
           clearAll={clearAll}
           setScreenshot={setScreenshot}
           copyToClipboard={copyToClipboard}
-      ></ButtonGroup>
+      />
       <ResultContainer seqList={seqList}></ResultContainer>
       <Tester testModalOpen={testModalOpen} 
               screenshot={screenshot} 
               setTestModalOpen={setTestModalOpen} 
               errorMessage={errorMessage}
-              eventLog={eventLog}>
-      </Tester>
+              eventLog={eventLog}/>
     </div>
   );
 }
