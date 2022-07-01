@@ -37,3 +37,10 @@ export enum EeventTypeEnum {
     Submit = "submit",
     WaitUntil = "waitUntil",
 }
+
+export interface IScreenshotResponse {
+    error: string;
+    log?: ILogEvent[];
+    screenshot?: string;
+    
+}

@@ -7,10 +7,7 @@ import Grid from '@mui/material/Grid';
 //Custom Styles
 import './App.css'
 
-//Default Sequence List
-/* import sequenceData from './data/example-sequence.json'; */
-
-import { ISequenceItem } from './interfaces'
+import { ISequenceItem, ILogEvent, IScreenshotResponse } from './interfaces'
 
 //Custom components
 import SequenceContainer from "./components/SequenceContainer/SequenceContainer";
@@ -31,7 +28,7 @@ function App() {
   const [idCount, setIdCount] = useState<number>(5);
   const [testModalOpen, setTestModalOpen] = useState<boolean>(false);
   const [screenshot, setScreenshot] = useState<string>("");
-  const [eventLog, setEventLog] = useState([]);
+  const [eventLog, setEventLog] = useState<ILogEvent[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [defaultDelay, setDefaultDelay] = useState<number>(30);
 
@@ -67,10 +64,10 @@ function App() {
     fetch('http://localhost:3005/screenshot?delay='+ (defaultDelay*1000),
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
       .then(response => response.json())
-      .then(data => {
-        setEventLog(data.log)
-        setScreenshot(data.screenshot)
-        setErrorMessage(data.error)
+      .then( (data: IScreenshotResponse ) => {
+        setEventLog(data.log || [])
+        setScreenshot(data.screenshot || "")
+        setErrorMessage(data.error || "")
       }
       ).catch(err => {
         console.log(err)
