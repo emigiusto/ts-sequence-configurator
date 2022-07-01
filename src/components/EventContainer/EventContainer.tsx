@@ -8,8 +8,8 @@ import { Typography, Box, Stack, Paper } from '@mui/material';
 
 //Available Events
 import _eventData from '../../data/available-events.json';
-const eventData = _eventData as IEvent[];
-
+const eventData = _eventData as IEvent[];   //@Josh: Even though I'm adding an static type, I can't see errors on compile time.
+                                            // Is it because I should import it from a Ts/Js file and not a Json?
 export interface Props {
     addSequence: Function,
     idCount: number

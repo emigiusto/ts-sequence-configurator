@@ -61,6 +61,15 @@ function InputGroup({name, seqItem, updateSequence}:Props) {
                                 value={seqItem.value}
                                 id="outlined-size-normal" margin="normal"  size="small" />
                     </form>)
+        case "submit":
+            return (<form className='sequence-item_more-inputs'> 
+                        <TextField  label="SELECTOR" 
+                                placeholder="#idExample"
+                                name="selector" fullWidth 
+                                onChange={handleOnChange} 
+                                value={seqItem.selector}
+                                id="outlined-size-normal" margin="normal"  size="small" />
+                    </form>)
         default:
             return <></>
     }

@@ -27,8 +27,8 @@ export interface ILogEvent {
 
 export interface IEvent {
     name: EeventTypeEnum
-    required: EeventTypeEnum[]
-}
+    required: EeventTypeEnum[]  //@Josh, I know this is not implemented correctly, but my intention was to set 
+}                               // only the values on the enumerator as valid for this field. How can I do that?
 
 export enum EeventTypeEnum {
     Navigate = "navigate",
@@ -42,5 +42,4 @@ export interface IScreenshotResponse {
     error: string;
     log?: ILogEvent[];
     screenshot?: string;
-    
 }

@@ -64,7 +64,7 @@ function App() {
     fetch('http://localhost:3005/screenshot?delay='+ (defaultDelay*1000),
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
       .then(response => response.json())
-      .then( (data: IScreenshotResponse ) => {
+      .then( (data: IScreenshotResponse ) => { //@Josh: I would really like to improve the type safety and good practices in this requests, any advice?
         setEventLog(data.log || [])
         setScreenshot(data.screenshot || "")
         setErrorMessage(data.error || "")
