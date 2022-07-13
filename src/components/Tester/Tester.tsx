@@ -33,7 +33,7 @@ export default function Tester({ testModalOpen,
     }, [testModalOpen]);
 
     useEffect(() => {
-        if (!(screenshot && Object.keys(screenshot).length === 0) && errorMessage!==""){
+        if (Object.keys(screenshot).length !== 0 || errorMessage!==""){
             setLoader(false)
         }
     }, [screenshot,errorMessage]);
