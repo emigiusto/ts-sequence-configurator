@@ -15,6 +15,8 @@ import EventContainer from "./components/EventContainer/EventContainer"
 import ButtonContainer from "./components/ButtonContainer/ButtonContainer"
 import ResultContainer from "./components/ResultContainer/ResultContainer"
 import Tester from "./components/Tester/Tester"
+import Importer from "./components/Importer/Importer"
+
 
 //Helper Functions
 import { sequenceConverter } from "./validators/sequenceConverter";
@@ -25,8 +27,9 @@ const sequenceData = _sequenceData as ISequenceItem[];
 
 function App() {
   const [seqList, setSeqList] = useState<ISequenceItem[]>(sequenceData);
-  const [idCount, setIdCount] = useState<number>(5);
+  const [idCount, setIdCount] = useState<number>(1000);
   const [testModalOpen, setTestModalOpen] = useState<boolean>(false);
+  const [importerOpen, setImporterOpen] = useState<boolean>(false);
   const [screenshot, setScreenshot] = useState<string>("");
   const [eventLog, setEventLog] = useState<ILogEvent[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -61,7 +64,7 @@ function App() {
     setEventLog([])
     const requestBody = { sequence: sequenceConverter(seqList) }
 
-    fetch('http://localhost:3005/screenshot?delay='+ (defaultDelay*1000),
+    fetch(process.env.REACT_APP_SCREENSHOT_PATH + '?delay='+ (defaultDelay*1000),
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
       .then(response => response.json())
       .then( (data: IScreenshotResponse ) => { //@Josh: I would really like to improve the type safety and good practices in this requests, any advice?
@@ -96,13 +99,19 @@ function App() {
           clearAll={clearAll}
           setScreenshot={setScreenshot}
           copyToClipboard={copyToClipboard}
+          setImporterOpen={setImporterOpen}
       />
       <ResultContainer seqList={seqList}></ResultContainer>
       <Tester testModalOpen={testModalOpen} 
               screenshot={screenshot} 
               setTestModalOpen={setTestModalOpen} 
               errorMessage={errorMessage}
-              eventLog={eventLog}/>
+              eventLog={eventLog}
+              defaultDelay={defaultDelay}
+              eventCount={seqList.length}/>
+      <Importer
+        importerOpen={importerOpen}
+        setImporterOpen = {setImporterOpen} />
     </div>
   );
 }
