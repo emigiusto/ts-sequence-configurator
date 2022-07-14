@@ -16,14 +16,18 @@ export interface Props {
     testModalOpen: boolean,
     eventLog: ILogEvent[],
     setTestModalOpen: Function,
-    errorMessage: string
+    errorMessage: string,
+    defaultDelay: number,
+    eventCount: number
 }
 
 export default function Tester({ testModalOpen, 
                                 screenshot, 
                                 eventLog, 
                                 setTestModalOpen, 
-                                errorMessage } : Props) {
+                                errorMessage,
+                                defaultDelay,
+                                eventCount } : Props) {
 
     const [loader, setLoader] = useState(true);
     const handleClose = () => setTestModalOpen(false)
@@ -95,7 +99,7 @@ export default function Tester({ testModalOpen,
                             /* Loader */
                             (<div className="loader-container">
                                         <p>Loading...</p>
-                                        <span>This process may take up to 30 seconds</span>
+                                        <span>This process may take up to {defaultDelay * eventCount} seconds</span>
                                         <div className="loader"></div>
                                 </div>)
                             }
