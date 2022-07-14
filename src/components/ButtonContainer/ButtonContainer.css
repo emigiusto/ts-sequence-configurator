@@ -1,3 +1,8 @@
 .delay-input{
     background-color: white;
+    max-width: 170px;
+}
+
+.import-button{
+    background-color: white !important;
 }

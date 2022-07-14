@@ -14,11 +14,12 @@ export interface Props {
     defaultDelay: number,
     clearAll: Function,
     setScreenshot: Function,
-    copyToClipboard: Function
+    copyToClipboard: Function,
+    setImporterOpen: Function
 }
 
 function ButtonContainer({  testSequence,setTestModalOpen, setDefaultDelay, 
-                        defaultDelay,clearAll,setScreenshot,copyToClipboard} : Props) {
+                        defaultDelay,clearAll,setScreenshot,copyToClipboard,setImporterOpen } : Props) {
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -26,6 +27,10 @@ function ButtonContainer({  testSequence,setTestModalOpen, setDefaultDelay,
         testSequence()
         setTestModalOpen(true)
         setScreenshot("")
+    }
+
+    const handleImportClick = () : void => {
+        setImporterOpen(true)
     }
 
     const handleClear = () : void => {
@@ -64,7 +69,7 @@ function ButtonContainer({  testSequence,setTestModalOpen, setDefaultDelay,
         <div>
             {/* Button bar */}
             <Box sx={{'& > :not(style)': {mt: 6,p: 0}}}>
-                    <Stack spacing={4} mt={8} direction="row" justifyContent="start">
+                    <Stack spacing={3} mt={8} direction="row" justifyContent="start">
                         <TextField label="Default delay (secs)" 
                                 onChange={handleChange} 
                                 placeholder={defaultDelay.toString()}
@@ -73,6 +78,7 @@ function ButtonContainer({  testSequence,setTestModalOpen, setDefaultDelay,
                         <Button variant="contained" color="secondary" onClick={handleCopyToClipboard}>Copy to Clipboard</Button>
                         <Button variant="contained" color="success" onClick={handleTestClick}>Test</Button>
                         <Button variant="contained" color="error" onClick={handleClear} >Clear All</Button>
+                        <Button variant="outlined" color="secondary" onClick={handleImportClick} className="import-button" >Import</Button>
                     </Stack>
             </Box>
             {/* Toast */}
