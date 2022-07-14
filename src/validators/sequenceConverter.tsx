@@ -1,17 +1,17 @@
 //Interfaces
-import { ISequenceItem, IResultSequenceItem } from '../interfaces'
+import { ISequenceItem, IResultSequenceItem, eventTypeEnum } from '../interfaces'
 
 
 export function sequenceConverter(seqList: ISequenceItem[]) : IResultSequenceItem[] {
     var transformed = seqList.map((seq: ISequenceItem ) : IResultSequenceItem => {
         switch (seq.name) {
-            case "navigate": return ["navigate","", seq.url]
-            case "setValue": return ["setValue",seq.selector,seq.value]
-            case "click": return ["click",seq.selector,""]
-            case "waitUntil": return ["waitUntil",seq.selector,""]
-            case "submit": return ["submit",seq.selector,""]
+            case "navigate": return [eventTypeEnum.Navigate,"", seq.url]
+            case "setValue": return [eventTypeEnum.SetValue,seq.selector,seq.value]
+            case "click": return [eventTypeEnum.Click,seq.selector,""]
+            case "waitUntil": return [eventTypeEnum.WaitUntil,seq.selector,""]
+            case "submit": return [eventTypeEnum.Submit,seq.selector,""]
             default:
-                return ["InvalidSequence","",""]
+                return [eventTypeEnum.Invalid,"",""]
         }
     })
     return transformed;
