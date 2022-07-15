@@ -1,24 +1,33 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-//Interfaces
-import { ILogEvent } from '../../interfaces'
+//Helper Functions
+import { sequenceParser } from "../../validators/sequenceParser";
 
 //MU
 import { Backdrop, Box, Modal, Fade, Typography, TextField, Button } from '@mui/material';
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import ErrorIcon from '@mui/icons-material/Error';
 
 //Custom Styles
 import './Importer.css'
 
 export interface Props {
     importerOpen: boolean,
-    setImporterOpen: Function
+    setImporterOpen: Function,
+    setSeqList: Function
 }
 
-export default function Importer({ importerOpen, setImporterOpen } : Props) {
+export default function Importer({ importerOpen, setImporterOpen, setSeqList } : Props) {
+    const [newSequence, setNewSequence] = useState<string>("");
 
     const handleClose = () => setImporterOpen(false)
+
+    const handleImportClick = () => {
+        setSeqList(sequenceParser(newSequence))
+        setImporterOpen(false)
+    }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewSequence(event.target.value);
+    };
 
     if(!importerOpen){
         return(null)
@@ -39,13 +48,14 @@ export default function Importer({ importerOpen, setImporterOpen } : Props) {
                 <Fade in={importerOpen}>
                     <Box sx={BoxStyle} className="importer">
                                 <div className="importer-inner">
-                                    <Typography variant='h5' mb={6} >Paste your sequence in the box below</Typography>
+                                    <Typography variant='h5' mb={4} >Paste your sequence in the box below</Typography>
                                     <TextField
                                         id="outlined-multiline-flexible"
                                         placeholder='[    [ "navigate" , "" , "https://example.com" ], [....]     ]'
                                         multiline
-                                        rows={20}/>
-                                    <Button variant="contained" color="success" className='importer__import-button'/* onClick={handleTestClick} */>Import</Button>
+                                        rows={15}
+                                        onChange={handleChange}/>
+                                    <Button variant="contained" color="success" className='importer__import-button' onClick={handleImportClick}>Import</Button>
                                 </div>
                     </Box>
                 </Fade>

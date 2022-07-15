@@ -62,7 +62,8 @@ function App() {
   const testSequence = async () => {
     setErrorMessage("")
     setEventLog([])
-    const requestBody = { sequence: sequenceConverter(seqList) }
+    console.log(seqList)
+/*     const requestBody = { sequence: sequenceConverter(seqList) }
 
     fetch(process.env.REACT_APP_SCREENSHOT_PATH + '?delay='+ (defaultDelay*1000),
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
@@ -76,7 +77,7 @@ function App() {
         console.log(err)
         console.log("Puppeteer service might not be available")  
         setErrorMessage("Puppeteer service might not be available")
-      })
+      }) */
   };
 
 
@@ -111,7 +112,8 @@ function App() {
               eventCount={seqList.length}/>
       <Importer
         importerOpen={importerOpen}
-        setImporterOpen = {setImporterOpen} />
+        setImporterOpen = {setImporterOpen}
+        setSeqList={setSeqList} />
     </div>
   );
 }
