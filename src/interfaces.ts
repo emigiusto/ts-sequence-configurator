@@ -41,8 +41,8 @@ export interface IEvent {
 }                               // only the values on the enumerator as valid for this field. How can I do that?
 export interface IScreenshotResponse {
     error: string;
-    log?: ILogEvent[];
-    screenshot?: string;
+    log: ILogEvent[] | null;
+    screenshot: string | null;
 }
 
 export enum eventTypeEnum {
