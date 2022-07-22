@@ -16,7 +16,7 @@ import ButtonContainer from "./components/ButtonContainer/ButtonContainer"
 import ResultContainer from "./components/ResultContainer/ResultContainer"
 import Tester from "./components/Tester/Tester"
 import Importer from "./components/Importer/Importer"
-
+import Toast from "./components/Toast/Toast"
 
 //Helper Functions
 import { sequenceConverter } from "./validators/sequenceConverter";
@@ -34,6 +34,8 @@ function App() {
   const [eventLog, setEventLog] = useState<ILogEvent[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [defaultDelay, setDefaultDelay] = useState<number>(30);
+  const [toastOpen, setToastOpen] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
 
   const addSequence = (newSeq: ISequenceItem) : void => {
     let newList = [...seqList, newSeq]
@@ -100,6 +102,8 @@ function App() {
           setScreenshot={setScreenshot}
           copyToClipboard={copyToClipboard}
           setImporterOpen={setImporterOpen}
+          setToastOpen={setToastOpen}
+          setToastMessage={setToastMessage}
       />
       <ResultContainer seqList={seqList}></ResultContainer>
       <Tester testModalOpen={testModalOpen} 
@@ -112,7 +116,13 @@ function App() {
       <Importer
         importerOpen={importerOpen}
         setImporterOpen = {setImporterOpen}
-        setSeqList={setSeqList} />
+        setSeqList={setSeqList} 
+        setToastOpen={setToastOpen}
+        setToastMessage={setToastMessage}/>
+      <Toast  
+        toastOpen={toastOpen}
+        setToastOpen={setToastOpen}
+        toastMessage={toastMessage}/>
     </div>
   );
 }

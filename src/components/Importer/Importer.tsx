@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, {useState} from 'react'
 
 //Helper Functions
 import { sequenceParser } from "../../validators/sequenceParser";
@@ -12,10 +12,12 @@ import './Importer.css'
 export interface Props {
     importerOpen: boolean,
     setImporterOpen: Function,
-    setSeqList: Function
+    setSeqList: Function,
+    setToastOpen: Function,
+    setToastMessage: Function,
 }
 
-export default function Importer({ importerOpen, setImporterOpen, setSeqList } : Props) {
+export default function Importer({ importerOpen, setImporterOpen, setSeqList, setToastOpen, setToastMessage } : Props) {
     const [newSequence, setNewSequence] = useState<string>("");
 
     const handleClose = () => setImporterOpen(false)
@@ -23,6 +25,8 @@ export default function Importer({ importerOpen, setImporterOpen, setSeqList } :
     const handleImportClick = () => {
         setSeqList(sequenceParser(newSequence))
         setImporterOpen(false)
+        setToastMessage("Imported")
+        setToastOpen(true)
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
