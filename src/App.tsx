@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 //Custom Styles
 import './App.css'
 
-import { ISequenceItem, ILogEvent, IScreenshotResponse } from './interfaces'
+import { ISequenceItem, ILogEvent, IScreenshotResponse, eventTypeEnum } from './interfaces'
 
 //Custom components
 import SequenceContainer from "./components/SequenceContainer/SequenceContainer";
@@ -38,9 +38,23 @@ function App() {
   const [toastMessage, setToastMessage] = useState<string>("");
 
   const addSequence = (newSeq: ISequenceItem) : void => {
-    let newList = [...seqList, newSeq]
+    let newList = [];
+    //Enforces First Event to be Navigate
+    if (seqList.length === 0 && newSeq.name !== eventTypeEnum.Navigate) {
+      newSeq.id = idCount + 1
+      newList = [ { id: idCount, 
+                    name: eventTypeEnum.Navigate, 
+                    required: ["url"], 
+                    selector: "", 
+                    url: "", 
+                    value: "" }
+                  , newSeq]
+      setIdCount(idCount + 2)
+    } else {
+      newList = [...seqList, newSeq]
+      setIdCount(idCount + 1)
+    }
     setSeqList(newList)
-    setIdCount(idCount + 1)
   }
 
   const removeSequence = (SeqIDToDelete: number) : void => {
@@ -61,20 +75,29 @@ function App() {
     navigator.clipboard.writeText(JSON.stringify(sequenceConverter(seqList)))
   }
 
-  const testSequence = async () => {
-    setErrorMessage("")
+  const testSequence = async () => { 
+    setScreenshot("")
     setEventLog([])
-    const requestBody = { sequence: sequenceConverter(seqList) }
+    setErrorMessage("")
 
-    fetch(process.env.REACT_APP_SCREENSHOT_PATH + '?delay='+ (defaultDelay*1000),
+    if (seqList.length ===0) {
+      console.log("No events to process")
+      setErrorMessage("No events to process")
+      return;
+    }
+
+    setTestModalOpen(true)
+
+    const requestBody = { sequence: sequenceConverter(seqList) }
+    fetch(process.env.REACT_APP_SCREENSHOT_PATH + '/screenshot?delay='+ (defaultDelay*1000),
       { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestBody) })
       .then(response => response.json())
-      .then( (data: IScreenshotResponse ) => { //@Josh: I would really like to improve the type safety and good practices in this requests, any advice?
+      .then( (data: IScreenshotResponse ) => {
         setEventLog(data.log || [])
         setScreenshot(data.screenshot || "")
         setErrorMessage(data.error || "")
-      }
-      ).catch(err => {
+      })
+      .catch(err => {
         console.log(err)
         console.log("Puppeteer service might not be available")  
         setErrorMessage("Puppeteer service might not be available")
@@ -95,11 +118,9 @@ function App() {
       </Grid>
       <ButtonContainer
           testSequence={testSequence}
-          setTestModalOpen={setTestModalOpen}
           setDefaultDelay={setDefaultDelay}
           defaultDelay={defaultDelay}
           clearAll={clearAll}
-          setScreenshot={setScreenshot}
           copyToClipboard={copyToClipboard}
           setImporterOpen={setImporterOpen}
           setToastOpen={setToastOpen}

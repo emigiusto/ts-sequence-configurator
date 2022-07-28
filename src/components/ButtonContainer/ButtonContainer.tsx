@@ -6,28 +6,23 @@ import './ButtonContainer.css';
 
 export interface ButtonContainerProps {
     testSequence: Function,
-    setTestModalOpen: Function,
     setDefaultDelay: Function,
     defaultDelay: number,
     clearAll: Function,
-    setScreenshot: Function,
     copyToClipboard: Function,
     setImporterOpen: Function
     setToastOpen: Function,
     setToastMessage: Function,
 }
 
-function ButtonContainer({  testSequence,
-                            setTestModalOpen, setDefaultDelay, 
-                            defaultDelay,clearAll,setScreenshot,
+function ButtonContainer({  testSequence, setDefaultDelay, 
+                            defaultDelay,clearAll,
                             copyToClipboard,setImporterOpen, 
                             setToastOpen, setToastMessage 
                         } : ButtonContainerProps) {
 
     const handleTestClick = () : void => {
         testSequence()
-        setTestModalOpen(true)
-        setScreenshot("")
     }
 
     const handleImportClick = () : void => {

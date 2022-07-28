@@ -12,7 +12,7 @@ export function sequenceParser(seq: string) : ISequenceItem[] {
     var transformed = arrSequenceItems.map((sequence: IResultSequenceItem ) : ISequenceItem => {
         let newSeq: ISequenceItem = {
             id: counter,
-            name: "",
+            name: eventTypeEnum.Empty,
             url: "",
             selector: "",
             value: "",
