@@ -11,7 +11,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 //Custom Styles
 import './Tester.css'
 
-export interface Props {
+export interface TesterProps {
     screenshot: string,
     testModalOpen: boolean,
     eventLog: ILogEvent[],
@@ -27,7 +27,7 @@ export default function Tester({ testModalOpen,
                                 setTestModalOpen, 
                                 errorMessage,
                                 defaultDelay,
-                                eventCount } : Props) {
+                                eventCount } : TesterProps) {
 
     const [loader, setLoader] = useState(true);
     const handleClose = () => setTestModalOpen(false)

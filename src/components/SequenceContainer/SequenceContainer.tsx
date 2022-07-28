@@ -10,13 +10,13 @@ import { Typography, Paper, Grid, Box } from '@mui/material';
 //Custom CSS
 import './SequenceContainer.css'
 
-export interface Props {
+export interface SequenceContainerProps {
     seqList:  ISequenceItem[]
     updateSequence: Function
     removeSequence: Function
 }
 
-function SequenceContainer({removeSequence,updateSequence,seqList} : Props) {
+function SequenceContainer({removeSequence,updateSequence,seqList} : SequenceContainerProps) {
     return (
         <div>
             <Box sx={{'& > :not(style)': {mt: 2,p: 3}}}>

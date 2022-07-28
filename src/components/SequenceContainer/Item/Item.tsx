@@ -18,13 +18,13 @@ import './Item.css'
 Should I implement type checking in functions passed as props? Example: updateSequence, removeSequence
 If that's the case, how can I do that?
 */
-export interface Props {
+export interface ItemProps {
     seqItem:  ISequenceItem
     updateSequence: Function
     removeSequence: Function
 }
 
-function Item({seqItem,removeSequence,updateSequence}: Props) {
+function Item({seqItem,removeSequence,updateSequence}: ItemProps) {
     const [valid, setValid] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(true);
 

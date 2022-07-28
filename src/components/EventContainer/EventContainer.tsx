@@ -10,12 +10,12 @@ import { Typography, Box, Stack, Paper } from '@mui/material';
 import _eventData from '../../data/available-events';
 const eventData = _eventData as IEvent[];   //@Josh: Even though I'm adding an static type, I can't see errors on compile time.
                                             // Is it because I should import it from a Ts/Js file and not a Json?
-export interface Props {
+export interface EventContainerProps {
     addSequence: Function,
     idCount: number
 }
 
-function EventContainer({ addSequence , idCount }: Props) {
+function EventContainer({ addSequence , idCount }: EventContainerProps) {
     return (
         <div>
             <Box sx={{'& > :not(style)': {mt: 2,p: 3,mb: 4,},}}>

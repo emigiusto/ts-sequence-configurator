@@ -4,13 +4,13 @@ import React from 'react'
 import { Snackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
-export interface Props {
+export interface ToastProps {
     toastOpen: boolean,
     setToastOpen: Function,
     toastMessage: string
 }
 
-function Toast({toastOpen, setToastOpen, toastMessage} : Props) {
+function Toast({toastOpen, setToastOpen, toastMessage} : ToastProps) {
 
     const handleToastClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {

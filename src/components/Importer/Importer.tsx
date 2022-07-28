@@ -9,7 +9,7 @@ import { Backdrop, Box, Modal, Fade, Typography, TextField, Button } from '@mui/
 //Custom Styles
 import './Importer.css'
 
-export interface Props {
+export interface ImporterProps {
     importerOpen: boolean,
     setImporterOpen: Function,
     setSeqList: Function,
@@ -17,7 +17,7 @@ export interface Props {
     setToastMessage: Function,
 }
 
-export default function Importer({ importerOpen, setImporterOpen, setSeqList, setToastOpen, setToastMessage } : Props) {
+export default function Importer({ importerOpen, setImporterOpen, setSeqList, setToastOpen, setToastMessage } : ImporterProps) {
     const [newSequence, setNewSequence] = useState<string>("");
 
     const handleClose = () => setImporterOpen(false)

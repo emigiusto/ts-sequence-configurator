@@ -4,11 +4,11 @@ import { ISequenceItem } from '../../interfaces'
 //MU
 import { Typography, Box, Paper } from '@mui/material';
 
-export interface Props {
+export interface ResultContainerProps {
     seqList:  ISequenceItem[]
 }
 
-function ResultContainer({seqList}: Props) {
+function ResultContainer({seqList}: ResultContainerProps) {
     return (
         <div>
             <Typography variant="h6" align="left" mt={4}>Resulting sequence</Typography>

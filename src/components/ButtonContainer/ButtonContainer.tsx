@@ -4,7 +4,7 @@ import { Box ,Stack ,Button ,TextField } from '@mui/material';
 //Custom styles
 import './ButtonContainer.css';
 
-export interface Props {
+export interface ButtonContainerProps {
     testSequence: Function,
     setTestModalOpen: Function,
     setDefaultDelay: Function,
@@ -22,7 +22,7 @@ function ButtonContainer({  testSequence,
                             defaultDelay,clearAll,setScreenshot,
                             copyToClipboard,setImporterOpen, 
                             setToastOpen, setToastMessage 
-                        } : Props) {
+                        } : ButtonContainerProps) {
 
     const handleTestClick = () : void => {
         testSequence()
