@@ -26,7 +26,7 @@ export interface Props {
 
 function Item({seqItem,removeSequence,updateSequence}: Props) {
     const [valid, setValid] = useState<boolean>(false);
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(true);
 
     useEffect(() => {
         let validation = seqItem.required.every((reqSelector: string) =>  seqItem[reqSelector])
