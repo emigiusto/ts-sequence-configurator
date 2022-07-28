@@ -1,23 +1,17 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 //Interfaces
-import { ISequenceItem } from '../../../interfaces'
+import { ISequenceItem , inputFieldEnum } from '../../../interfaces'
 
 //Custom Components
 import InputGroup from '../InputGroup/InputGroup';
 
 //MU
-import { styled, Typography, Paper, Grid  } from '@mui/material';
+import { styled, Typography, Paper, Grid } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 //Custom css
 import './Item.css'
-
-/* 
-@Josh
-Should I implement type checking in functions passed as props? Example: updateSequence, removeSequence
-If that's the case, how can I do that?
-*/
 export interface ItemProps {
     seqItem:  ISequenceItem
     updateSequence: Function
@@ -29,7 +23,9 @@ function Item({seqItem,removeSequence,updateSequence}: ItemProps) {
     const [open, setOpen] = useState<boolean>(true);
 
     useEffect(() => {
-        let validation = seqItem.required.every((reqSelector: string) =>  seqItem[reqSelector])
+        let validation = seqItem.required.every((reqSelector: inputFieldEnum) =>  {
+            return (seqItem[reqSelector] !== "")
+        })
         setValid(validation);
     }, [seqItem]);
 

@@ -21,6 +21,10 @@ let availableEvents: IEvent[] =
     {
         "name": eventTypeEnum.Submit,
         "required": [inputFieldEnum.Selector]
+    },
+    {
+        "name": eventTypeEnum.Timeout,
+        "required": [inputFieldEnum.Value]
     }
 ]
 

@@ -10,6 +10,7 @@ export function sequenceConverter(seqList: ISequenceItem[]) : IResultSequenceIte
             case "click": return [eventTypeEnum.Click,seq.selector,""]
             case "waitUntil": return [eventTypeEnum.WaitUntil,seq.selector,""]
             case "submit": return [eventTypeEnum.Submit,seq.selector,""]
+            case "timeout": return [eventTypeEnum.Timeout,"",seq.value]
             default:
                 return [eventTypeEnum.Invalid,"",""]
         }

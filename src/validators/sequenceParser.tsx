@@ -45,6 +45,11 @@ export function sequenceParser(seq: string) : ISequenceItem[] {
                 newSeq.selector = sequence[1]
                 newSeq.required = [inputFieldEnum.Selector]
                 break;
+            case "timeout": 
+                newSeq.name = eventTypeEnum.Timeout
+                newSeq.value = sequence[2]
+                newSeq.required = [inputFieldEnum.Value]
+                break;
             default:
                 newSeq.name = eventTypeEnum.Invalid
                 break;

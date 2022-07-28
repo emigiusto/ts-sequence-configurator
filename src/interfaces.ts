@@ -1,15 +1,4 @@
-/* 
-@Josh
-Am I using Record utility type correctly?
-I only added so I can run this line: newSeqItem[e.target.name] = e.target.value on InputGroup
-But I don't fully understand its implicance 
-*/
-
-//Remove key:string ....
-//separate metadata from data
-// move required to Item
 export interface ISequenceItem {
-    [key: string]: number | string | string[]
     id: number
     name: eventTypeEnum
     required: inputFieldEnum[]
@@ -46,6 +35,7 @@ export enum eventTypeEnum {
     Click = "click",
     Submit = "submit",
     WaitUntil = "waitUntil",
+    Timeout = "timeout",
     Invalid = "invalid",
     Empty = ""
 }

@@ -82,6 +82,19 @@ function InputGroup({name, seqItem, updateSequence}:InputGroupProps) {
                                 value={seqItem.selector}
                                 id="outlined-size-normal" margin="normal"  size="small" />
                     </form>)
+        case "timeout":
+            return (<form className='sequence-item_more-inputs'> 
+                        <TextField label="VALUE" 
+                                type="number"
+                                placeholder="Timeout value in milisecs"
+                                name="value" fullWidth 
+                                onChange={(event => {
+                                    seqItem.value = event.target.value.toString()
+                                    updateSequence(seqItem)
+                                })}  
+                                value={seqItem.value}
+                                id="outlined-size-normal" margin="normal"  size="small" />
+                    </form>)
         default:
             return <></>
     }
