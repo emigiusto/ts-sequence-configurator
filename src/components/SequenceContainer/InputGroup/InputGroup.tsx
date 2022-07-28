@@ -4,19 +4,13 @@ import { ISequenceItem } from '../../../interfaces'
 //MU
 import TextField from '@mui/material/TextField';
 
-export interface Props {
+export interface InputGroupProps {
     name: string
     seqItem:  ISequenceItem
     updateSequence: Function
 }
 
-function InputGroup({name, seqItem, updateSequence}:Props) {
-
-    const handleOnChange = (e: { target: { name: string; value: string; }; }) : void =>{
-        let newSeqItem:  ISequenceItem  = {...seqItem}
-        newSeqItem[e.target.name] = e.target.value
-        updateSequence(newSeqItem)
-    }
+function InputGroup({name, seqItem, updateSequence}:InputGroupProps) {
 
     switch (name) {
         case "navigate":
@@ -24,7 +18,10 @@ function InputGroup({name, seqItem, updateSequence}:Props) {
                         <TextField  label="URL" 
                                 placeholder="https://www.example.com/" 
                                 name="url" fullWidth 
-                                onChange={handleOnChange} 
+                                onChange={(event => {
+                                    seqItem.url = event.target.value
+                                    updateSequence(seqItem)
+                                })} 
                                 value={seqItem.url}
                                 id="outlined-size-normal" margin="normal" size="small" />
                     </form>)
@@ -33,7 +30,10 @@ function InputGroup({name, seqItem, updateSequence}:Props) {
                         <TextField  label="SELECTOR" 
                                 placeholder="#idExample"
                                 name="selector" fullWidth 
-                                onChange={handleOnChange} 
+                                onChange={(event => {
+                                    seqItem.selector = event.target.value
+                                    updateSequence(seqItem)
+                                })} 
                                 value={seqItem.selector}
                                 id="outlined-size-normal" margin="normal"  size="small" />
                     </form>)
@@ -42,7 +42,10 @@ function InputGroup({name, seqItem, updateSequence}:Props) {
                     <TextField  label="SELECTOR" 
                                 placeholder="#idExample"
                                 name="selector" fullWidth 
-                                onChange={handleOnChange} 
+                                onChange={(event => {
+                                    seqItem.selector = event.target.value
+                                    updateSequence(seqItem)
+                                })} 
                                 value={seqItem.selector}
                             id="outlined-size-normal" margin="normal"  size="small" />
                     </form>)
@@ -51,13 +54,19 @@ function InputGroup({name, seqItem, updateSequence}:Props) {
                         <TextField  label="SELECTOR" 
                                 placeholder="#idExample"
                                 name="selector" fullWidth 
-                                onChange={handleOnChange} 
+                                onChange={(event => {
+                                    seqItem.selector = event.target.value
+                                    updateSequence(seqItem)
+                                })} 
                                 value={seqItem.selector}
                                 id="outlined-size-normal" margin="normal"  size="small" />
                         <TextField  label="VALUE" 
                                 placeholder="myUserName"
                                 name="value" fullWidth 
-                                onChange={handleOnChange} 
+                                onChange={(event => {
+                                    seqItem.value = event.target.value
+                                    updateSequence(seqItem)
+                                })}  
                                 value={seqItem.value}
                                 id="outlined-size-normal" margin="normal"  size="small" />
                     </form>)
@@ -66,7 +75,10 @@ function InputGroup({name, seqItem, updateSequence}:Props) {
                         <TextField  label="SELECTOR" 
                                 placeholder="#idExample"
                                 name="selector" fullWidth 
-                                onChange={handleOnChange} 
+                                onChange={(event => {
+                                    seqItem.selector = event.target.value
+                                    updateSequence(seqItem)
+                                })} 
                                 value={seqItem.selector}
                                 id="outlined-size-normal" margin="normal"  size="small" />
                     </form>)
