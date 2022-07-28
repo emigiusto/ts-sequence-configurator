@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 //Custom Styles
 import './App.css'
 
-import { ISequenceItem, ILogEvent, IScreenshotResponse, eventTypeEnum } from './interfaces'
+import { ISequenceItem, ILogEvent, IScreenshotResponse, eventTypeEnum, inputFieldEnum} from './interfaces'
 
 //Custom components
 import SequenceContainer from "./components/SequenceContainer/SequenceContainer";
@@ -44,7 +44,7 @@ function App() {
       newSeq.id = idCount + 1
       newList = [ { id: idCount, 
                     name: eventTypeEnum.Navigate, 
-                    required: ["url"], 
+                    required: [inputFieldEnum.URL], 
                     selector: "", 
                     url: "", 
                     value: "" }

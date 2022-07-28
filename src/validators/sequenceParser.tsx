@@ -1,5 +1,5 @@
 //Interfaces
-import { ISequenceItem, IResultSequenceItem, eventTypeEnum } from '../interfaces'
+import { ISequenceItem, IResultSequenceItem, eventTypeEnum, inputFieldEnum } from '../interfaces'
 
 export function sequenceParser(seq: string) : ISequenceItem[] {
     if (seq[0] !== "[" || seq[seq.length-1] !=="]") {
@@ -22,28 +22,28 @@ export function sequenceParser(seq: string) : ISequenceItem[] {
             case "navigate": 
                 newSeq.name = eventTypeEnum.Navigate
                 newSeq.url = sequence[2]
-                newSeq.required = ["url"]
+                newSeq.required = [inputFieldEnum.URL]
                 break;
             case "setValue": 
                 newSeq.name = eventTypeEnum.SetValue
                 newSeq.selector = sequence[1]
                 newSeq.value = sequence[2]
-                newSeq.required = ["selector", "value"]
+                newSeq.required = [inputFieldEnum.Selector, inputFieldEnum.Value]
                 break;
             case "click": 
                 newSeq.name = eventTypeEnum.Click
                 newSeq.selector = sequence[1]
-                newSeq.required = ["selector"]
+                newSeq.required = [inputFieldEnum.Selector]
                 break;
             case "waitUntil": 
                 newSeq.name = eventTypeEnum.WaitUntil
                 newSeq.selector = sequence[1]
-                newSeq.required = ["selector"]
+                newSeq.required = [inputFieldEnum.Selector]
                 break;
             case "submit": 
                 newSeq.name = eventTypeEnum.Submit
                 newSeq.selector = sequence[1]
-                newSeq.required = ["selector"]
+                newSeq.required = [inputFieldEnum.Selector]
                 break;
             default:
                 newSeq.name = eventTypeEnum.Invalid

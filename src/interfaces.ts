@@ -12,7 +12,7 @@ export interface ISequenceItem {
     [key: string]: number | string | string[]
     id: number
     name: eventTypeEnum
-    required: string[]
+    required: inputFieldEnum[]
     selector: string
     url: string
     value: string
