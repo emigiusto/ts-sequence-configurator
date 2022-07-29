@@ -5,12 +5,24 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:import/typescript"
     ],
+    "settings": {
+        "import/extensions": [
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ]
+    },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "tsx": true
         },
         "ecmaVersion": "latest",
         "sourceType": "module"
@@ -20,9 +32,38 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "indent": [
+        "linebreak-style": 0,
+        "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
+        "prefer-destructuring": ["error", {
+            "array": false,
+            "object": true
+        }, {
+            "enforceForRenamedProperties": false
+        }],
+        "import/extensions": [
             "error",
-            4
-        ]
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "indent": ["error", 2],
+        "skipBlankLines": 0,
+        "ignoreComments": 0,
+        "no-use-before-define": ["error", {
+            "functions": false,
+            "classes": false,
+            "variables": false,
+            "allowNamedExports": true
+        }],
+        "object-curly-newline": ["error", {
+                "ObjectExpression": "always",
+                "ObjectPattern": { "multiline": true },
+                "ImportDeclaration": "never",
+                "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+        }]
     }
 }

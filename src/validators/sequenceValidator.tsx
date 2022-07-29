@@ -1,8 +1,9 @@
-//Interfaces
-import { ISequenceItem } from '../interfaces'
+// Interfaces
+import { ISequenceItem } from '../interfaces';
 
-//Not being used
-export function sequenceValidator(seqList: ISequenceItem[]) : boolean {
-    //console.log(seqList)
-    return true
+// Not being used
+function sequenceValidator(seqList: ISequenceItem[]) : boolean {
+  return true;
 }
+
+export default sequenceValidator;
