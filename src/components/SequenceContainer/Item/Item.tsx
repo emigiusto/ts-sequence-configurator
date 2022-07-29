@@ -80,5 +80,8 @@ export default Item;
 // Validates if all the required constraints defined in available-events.ts for an certain Event
 export function validateEventItem(seqItem: ISequenceItem) : boolean {
   const ItemEventFiltered = availableEvents.filter((ev) => ev.name === seqItem.name)[0];
-  return ItemEventFiltered.required.every((reqSelector: inputFieldEnum) => (seqItem[reqSelector] !== ''));
+  if (ItemEventFiltered) {
+    return ItemEventFiltered.required.every((reqSelector: inputFieldEnum) => (seqItem[reqSelector] !== ''));
+  }
+  return false;
 }

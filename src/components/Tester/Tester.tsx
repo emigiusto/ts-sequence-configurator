@@ -128,7 +128,7 @@ export default function Tester({
                 <div className="loader-container">
                   <p>Loading...</p>
                   <span>
-                    This process may take up to {defaultDelay * eventCount} seconds
+                    This process may take up to { defaultDelay * eventCount } seconds.
                   </span>
                   <div className="loader" />
                 </div>
