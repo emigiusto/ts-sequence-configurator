@@ -1,7 +1,6 @@
 export interface ISequenceItem {
     id: number
     name: eventTypeEnum
-    required: inputFieldEnum[]
     selector: string
     url: string
     value: string

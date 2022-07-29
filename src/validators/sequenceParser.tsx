@@ -1,9 +1,9 @@
 //Interfaces
-import { ISequenceItem, IResultSequenceItem, eventTypeEnum, inputFieldEnum } from '../interfaces'
+import { ISequenceItem, IResultSequenceItem, eventTypeEnum } from '../interfaces'
 
 export function sequenceParser(seq: string) : ISequenceItem[] {
     if (seq[0] !== "[" || seq[seq.length-1] !=="]") {
-        return [{id: 9999, name: eventTypeEnum.Invalid,url: "",selector: "",value: "",required: []}] //Invalid sequence
+        return [{id: 9999, name: eventTypeEnum.Invalid,url: "",selector: "",value: ""}] //Invalid sequence
     }
     let arrStringSequences: string[] = stringToArray(seq.replace(/\s/g, ''))
     let arrSequenceItems: IResultSequenceItem[] = arrayStringToSeqItemArray(arrStringSequences)
@@ -15,40 +15,33 @@ export function sequenceParser(seq: string) : ISequenceItem[] {
             name: eventTypeEnum.Empty,
             url: "",
             selector: "",
-            value: "",
-            required: []
+            value: ""
         }
         switch (sequence[0]) {
             case "navigate": 
                 newSeq.name = eventTypeEnum.Navigate
                 newSeq.url = sequence[2]
-                newSeq.required = [inputFieldEnum.URL]
                 break;
             case "setValue": 
                 newSeq.name = eventTypeEnum.SetValue
                 newSeq.selector = sequence[1]
                 newSeq.value = sequence[2]
-                newSeq.required = [inputFieldEnum.Selector, inputFieldEnum.Value]
                 break;
             case "click": 
                 newSeq.name = eventTypeEnum.Click
                 newSeq.selector = sequence[1]
-                newSeq.required = [inputFieldEnum.Selector]
                 break;
             case "waitUntil": 
                 newSeq.name = eventTypeEnum.WaitUntil
                 newSeq.selector = sequence[1]
-                newSeq.required = [inputFieldEnum.Selector]
                 break;
             case "submit": 
                 newSeq.name = eventTypeEnum.Submit
                 newSeq.selector = sequence[1]
-                newSeq.required = [inputFieldEnum.Selector]
                 break;
             case "timeout": 
                 newSeq.name = eventTypeEnum.Timeout
                 newSeq.value = sequence[2]
-                newSeq.required = [inputFieldEnum.Value]
                 break;
             default:
                 newSeq.name = eventTypeEnum.Invalid

@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 //Interfaces
 import { ISequenceItem , inputFieldEnum } from '../../../interfaces'
 
+//Available events
+import availableEvents from '../../../data/available-events'
+
 //Custom Components
 import InputGroup from '../InputGroup/InputGroup';
 
@@ -23,10 +26,7 @@ function Item({seqItem,removeSequence,updateSequence}: ItemProps) {
     const [open, setOpen] = useState<boolean>(true);
 
     useEffect(() => {
-        let validation = seqItem.required.every((reqSelector: inputFieldEnum) =>  {
-            return (seqItem[reqSelector] !== "")
-        })
-        setValid(validation);
+        setValid(validateEventItem(seqItem));
     }, [seqItem]);
 
     const ItemBox = styled(Paper)(({ theme }) => ({
@@ -64,3 +64,11 @@ function Item({seqItem,removeSequence,updateSequence}: ItemProps) {
 }
 
 export default Item;
+
+//Validates if all the required constraints defined in available-events.ts for an certain Event are true 
+export function validateEventItem(seqItem: ISequenceItem) : boolean {
+    let ItemEventFiltered = availableEvents.filter(ev => ev.name === seqItem.name)[0]
+    return ItemEventFiltered.required.every((reqSelector: inputFieldEnum) =>  {
+            return (seqItem[reqSelector] !== "")
+    })
+}
