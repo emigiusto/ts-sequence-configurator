@@ -88,7 +88,6 @@ function App() {
     setErrorMessage('');
 
     if (seqList.length === 0) {
-      console.log('No events to process');
       setErrorMessage('No events to process');
       return;
     }
@@ -116,8 +115,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        console.log('Puppeteer service might not be available');
-        setErrorMessage('Puppeteer service might not be available');
+        setErrorMessage(err);
       });
   };
 
