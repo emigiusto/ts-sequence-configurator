@@ -34,7 +34,6 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "linebreak-style": 0,
         "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
         "prefer-destructuring": ["error", {
             "array": false,
@@ -53,7 +52,6 @@
             }
         ],
         "indent": ["error", 2],
-        "skipBlankLines": 0,
         "ignoreComments": 0,
         "no-use-before-define": ["error", {
             "functions": false,
