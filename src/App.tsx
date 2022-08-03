@@ -114,7 +114,6 @@ function App() {
         setErrorMessage(data.error || '');
       })
       .catch((err) => {
-        console.log(err);
         setErrorMessage(err);
       });
   };
