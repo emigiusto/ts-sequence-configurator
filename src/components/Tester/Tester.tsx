@@ -90,7 +90,7 @@ export default function Tester({
                       ) : null
                   }
                   { // Renders log events if not null
-                    eventLog
+                    eventLog.length > 0
                       ? (
                         <>
                           <Typography variant="h6" className="event-log-title" mt={4}>Event log:</Typography>

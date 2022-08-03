@@ -109,12 +109,15 @@ function App() {
     )
       .then((response) => response.json())
       .then((data: IScreenshotResponse) => {
-        setEventLog(data.log || []);
-        setScreenshot(data.screenshot || '');
-        setErrorMessage(data.error || '');
+        if (data) {
+          setEventLog(data.log || []);
+          setScreenshot(data.screenshot || '');
+          setErrorMessage(data.error || '');
+        }
       })
       .catch((err) => {
-        setErrorMessage(err);
+        console.log(err);
+        setErrorMessage('The service may be unavailable');
       });
   };
 
