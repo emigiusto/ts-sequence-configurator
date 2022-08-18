@@ -68,13 +68,13 @@ export default function Tester({
                   {errorMessage ? (
                     <div className="title-container">
                       <Typography variant="h5" mr={6}>Error!</Typography>
-                      <img src="/icons/cancel-40.png" alt="cancel-icon" className="tester-icon" />
+                      <img src="/assets/async-configurator/icons/cancel-40.png" alt="cancel-icon" className="tester-icon" />
                     </div>
                   )
                     : (
                       <div className="title-container">
                         <Typography variant="h5" mr={6}>Success!</Typography>
-                        <img src="/icons/done-40.png" alt="done-icon" className="tester-icon" />
+                        <img src="/assets/async-configurator/icons/done-40.png" alt="done-icon" className="tester-icon" />
                       </div>
                     )}
 

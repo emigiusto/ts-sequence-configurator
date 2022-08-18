@@ -107,6 +107,9 @@ export function arrayStringToSeqItemArray(arr: string[]) : IResultSequenceItem[]
     case 'waitUntil': return {
       0: eventTypeEnum.WaitUntil, 1: itemArray[1], 2: itemArray[2],
     };
+    case 'timeout': return {
+      0: eventTypeEnum.Timeout, 1: itemArray[1], 2: itemArray[2],
+    };
     default: return {
       0: eventTypeEnum.Invalid, 1: '', 2: '',
     };
