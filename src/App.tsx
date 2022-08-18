@@ -22,7 +22,7 @@ import Toast from './components/Toast/Toast';
 import sequenceConverter from './validators/sequenceConverter';
 
 // Default Sequence List
-import _sequenceData from './data/example-sequence.json';
+import _sequenceData from './data/mock-sequence.json';
 
 const sequenceData = _sequenceData as ISequenceItem[];
 
