@@ -3,6 +3,15 @@
     font-weight: 600;
 }
 
+
+.sequence-item svg{
+    position: absolute !important;
+    right: 8px;
+}
+.sequence-item svg:hover{
+    transform: scale(1.2);
+}
+
 .sequence-item_box{
     cursor: pointer;
     position: relative;
@@ -10,7 +19,13 @@
     border-top: 1px solid rgba(128, 128, 128, 0.282);
 }
 
-.sequence-item[valid="false"] .sequence-item_box{
+.sequence-item_box:hover{
+    transform: scale(1.03);
+    transition: transform 120ms;
+}
+
+
+.sequence-item[data-valid = false] .sequence-item_box{
     border: 1px solid red;
 }
 
