@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>puppeteer-sequence-configurator</id>
+    <version>1.0.1</version>
+    <authors>Emiliano Giusto</authors>
+    <owners>Cludo</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Cludo Async Crawler Configurator</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright Cludo 2022</copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
