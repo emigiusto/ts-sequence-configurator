@@ -95,7 +95,7 @@ function App() {
     setTestModalOpen(true);
 
     const requestBody = {
-      sequence: sequenceConverter(seqList),
+      events: sequenceConverter(seqList),
     };
     fetch(
       `${process.env.REACT_APP_SCREENSHOT_PATH}/screenshot?delay=${defaultDelay * 1000}`,
