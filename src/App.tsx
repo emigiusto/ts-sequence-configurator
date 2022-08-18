@@ -98,7 +98,7 @@ function App() {
       events: sequenceConverter(seqList),
     };
     fetch(
-      `${process.env.REACT_APP_SCREENSHOT_PATH}/screenshot?delay=${defaultDelay * 1000}`,
+      `${process.env.REACT_APP_SCREENSHOT_PATH}/event-sequence?delay=${defaultDelay * 1000}`,
       {
         method: 'POST',
         headers: {
