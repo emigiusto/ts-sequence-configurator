@@ -96,9 +96,10 @@ function App() {
 
     const requestBody = {
       events: sequenceConverter(seqList),
+      delay: (defaultDelay * 1000),
     };
     fetch(
-      `${process.env.REACT_APP_SCREENSHOT_PATH}/event-sequence?delay=${defaultDelay * 1000}`,
+      `${process.env.REACT_APP_SCREENSHOT_PATH}/event-sequence`,
       {
         method: 'POST',
         headers: {
