@@ -79,6 +79,7 @@ export default function Tester({
                     )}
 
                   <code className="error-message">{errorMessage}</code>
+                  {errorMessage === 'The service may be unavailable' ? <code className="error-message">Please check that you are connected to the VPN</code> : null}
 
                   {// Renders screenshot if not null
                     screenshot
