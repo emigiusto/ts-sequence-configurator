@@ -7,7 +7,7 @@ function sequenceParser(seq: string) : ISequenceItem[] {
       id: 9999, name: eventTypeEnum.Invalid, url: '', selector: '', value: '',
     }]; // Invalid sequence
   }
-  const arrStringSequences: string[] = stringToArray(seq.replace(/\s/g, ''));
+  const arrStringSequences: string[] = stringToArray(seq.replace(/\s+(?="|\[|\]|,)+/g, '').replace(/(?<=")\s+/g, ''));
   const arrSequenceItems: IResultSequenceItem[] = arrayStringToSeqItemArray(arrStringSequences);
 
   let counter = 0;
