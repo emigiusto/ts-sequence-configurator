@@ -64,8 +64,10 @@ function ButtonContainer({
   };
 
   useEffect(() => {
+    // Sets the list of all hosts available to be loaded as Select items in the dropdown
     setDomainList(process.env.REACT_APP_SCREENSHOT_PATH
       ? process.env.REACT_APP_SCREENSHOT_PATH.split(',') : []);
+    // Sets default Path
     setEnvironmentPath(process.env.REACT_APP_SCREENSHOT_PATH ? process.env.REACT_APP_SCREENSHOT_PATH.split(',')[0] : 'No Path');
   }, []);
 
