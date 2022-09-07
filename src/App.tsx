@@ -37,6 +37,7 @@ function App() {
   const [defaultDelay, setDefaultDelay] = useState<number>(30);
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>('');
+  const [environmentPath, setEnvironmentPath] = useState<string>('https://asyncrender-eu.cludo.com');
 
   const addSequence = (newSeq: ISequenceItem) : void => {
     let newList = [];
@@ -99,7 +100,7 @@ function App() {
       delay: (defaultDelay * 1000),
     };
     fetch(
-      `${process.env.REACT_APP_SCREENSHOT_PATH}/event-sequence`,
+      `${environmentPath}/event-sequence`,
       {
         method: 'POST',
         headers: {
@@ -146,6 +147,8 @@ function App() {
         setImporterOpen={setImporterOpen}
         setToastOpen={setToastOpen}
         setToastMessage={setToastMessage}
+        setEnvironmentPath={setEnvironmentPath}
+        environmentPath={environmentPath}
       />
       <ResultContainer seqList={seqList} />
       <Tester
