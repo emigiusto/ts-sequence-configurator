@@ -37,7 +37,7 @@ function App() {
   const [defaultDelay, setDefaultDelay] = useState<number>(30);
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>('');
-  const [environmentPath, setEnvironmentPath] = useState<string>('https://asyncrender-eu.cludo.com');
+  const [environmentPath, setEnvironmentPath] = useState<string>('');
 
   const addSequence = (newSeq: ISequenceItem) : void => {
     let newList = [];

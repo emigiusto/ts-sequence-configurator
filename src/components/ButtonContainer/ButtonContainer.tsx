@@ -66,6 +66,7 @@ function ButtonContainer({
   useEffect(() => {
     setDomainList(process.env.REACT_APP_SCREENSHOT_PATH
       ? process.env.REACT_APP_SCREENSHOT_PATH.split(',') : []);
+    setEnvironmentPath(process.env.REACT_APP_SCREENSHOT_PATH ? process.env.REACT_APP_SCREENSHOT_PATH.split(',')[0] : 'No Path');
   }, []);
 
   return (
