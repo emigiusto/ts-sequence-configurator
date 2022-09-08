@@ -20,6 +20,7 @@ import Toast from './components/Toast/Toast';
 
 // Helper Functions
 import sequenceConverter from './validators/sequenceConverter';
+import immutableArraySwap from './helperFunctions/arrayOperations';
 
 // Default Sequence List
 import _sequenceData from './data/mock-sequence.json';
@@ -63,6 +64,25 @@ function App() {
   const removeSequence = (SeqIDToDelete: number) : void => {
     const filteredSeqList = seqList.filter((seq) => seq.id !== SeqIDToDelete);
     setSeqList(filteredSeqList);
+  };
+
+  const moveSequence = (id: number, direction: string) : void => {
+    const seqItemIndex = seqList.findIndex((it) => it.id === id);
+    let reorderedSeqList:ISequenceItem[];
+    switch (direction) {
+    case 'left':
+      reorderedSeqList = seqItemIndex > 0
+        ? immutableArraySwap(seqList, seqItemIndex, seqItemIndex - 1) : seqList;
+      break;
+    case 'right':
+      reorderedSeqList = seqItemIndex < seqList.length - 1
+        ? immutableArraySwap(seqList, seqItemIndex, seqItemIndex + 1) : seqList;
+      break;
+    default:
+      reorderedSeqList = seqList;
+      break;
+    }
+    setSeqList(reorderedSeqList);
   };
 
   const clearAll = () => {
@@ -131,6 +151,7 @@ function App() {
             seqList={seqList}
             removeSequence={removeSequence}
             updateSequence={updateSequence}
+            moveSequence={moveSequence}
           />
         </Grid>
         <Grid item xs={2}>
