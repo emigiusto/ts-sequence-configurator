@@ -16,9 +16,17 @@ export interface SequenceContainerProps {
     seqList: ISequenceItem[]
     updateSequence: Function
     removeSequence: Function
+    moveSequence: Function
 }
 
-function SequenceContainer({ removeSequence, updateSequence, seqList } : SequenceContainerProps) {
+function SequenceContainer(
+  {
+    removeSequence,
+    updateSequence,
+    seqList,
+    moveSequence,
+  } : SequenceContainerProps,
+) {
   return (
     <div>
       <Box sx={{
@@ -42,6 +50,7 @@ function SequenceContainer({ removeSequence, updateSequence, seqList } : Sequenc
                 key={seq.id}
                 removeSequence={removeSequence}
                 updateSequence={updateSequence}
+                moveSequence={moveSequence}
                 seqItem={seq}
               />
             ))}

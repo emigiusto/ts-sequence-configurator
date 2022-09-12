@@ -20,9 +20,10 @@ export interface ItemProps {
     seqItem: ISequenceItem
     updateSequence: Function
     removeSequence: Function
+    moveSequence: Function
 }
 
-function Item({ seqItem, removeSequence, updateSequence }: ItemProps) {
+function Item({ seqItem, removeSequence, updateSequence, moveSequence }: ItemProps) {
   const [valid, setValid] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(true);
 
@@ -42,7 +43,7 @@ function Item({ seqItem, removeSequence, updateSequence }: ItemProps) {
     setOpen(!open);
   };
 
-  const handleRemoveClick = (id:number) : void => {
+  const handleRemoveClick = (id: number) : void => {
     removeSequence(id);
   };
 
@@ -63,11 +64,27 @@ function Item({ seqItem, removeSequence, updateSequence }: ItemProps) {
         </ItemBox>
         { open
           ? (
-            <InputGroup
-              name={seqItem.name}
-              seqItem={seqItem}
-              updateSequence={updateSequence}
-            />
+            <>
+              <button
+                type="button"
+                className="arrow-left"
+                aria-label="Move Backward"
+                onClick={() => moveSequence(seqItem.id, 'left')}
+                onKeyDown={() => moveSequence(seqItem.id, 'left')}
+              />
+              <InputGroup
+                name={seqItem.name}
+                seqItem={seqItem}
+                updateSequence={updateSequence}
+              />
+              <button
+                type="button"
+                className="arrow-right"
+                aria-label="Move Forward"
+                onClick={() => moveSequence(seqItem.id, 'right')}
+                onKeyDown={() => moveSequence(seqItem.id, 'right')}
+              />
+            </>
           )
           : null}
       </div>

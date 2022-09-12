@@ -1,3 +1,7 @@
+.sequence-item{
+    position: relative;
+}
+
 .sequence-item span{
     font-size: 14px;
     font-weight: 600;
@@ -52,6 +56,43 @@
 .sequence-item_more-inputs input{
     background-color:white;
     font-size: 13px;
+}
+
+/* Moving steps arrow styling */
+.sequence-item:hover .arrow-left, .sequence-item:hover .arrow-right {
+  opacity: 1;
+}
+
+.arrow-right,
+.arrow-left{
+  opacity: 0;
+  border: 0;
+  background: transparent;
+  display: block;
+  margin: 30px auto;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  position: absolute;
+  top: 45px;
+  cursor: pointer;
+  transition: all .2s ease-in-out; 
+}
+
+.arrow-right{
+ transform: rotate(135deg);
+ right: -15px;
+}
+.arrow-left{
+ transform: rotate(-45deg);
+ left: -15px;
+}
+.arrow-right:hover{   
+    right: -18px;
+}
+.arrow-left:hover{   
+    left: -18px;
 }
 
 /* Extra small devices (phones, 600px and down) */
