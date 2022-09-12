@@ -59,8 +59,13 @@
 }
 
 /* Moving steps arrow styling */
+.sequence-item:hover .arrow-left, .sequence-item:hover .arrow-right {
+  opacity: 1;
+}
+
 .arrow-right,
-.arrow-left{   
+.arrow-left{
+  opacity: 0;
   border: 0;
   background: transparent;
   display: block;
