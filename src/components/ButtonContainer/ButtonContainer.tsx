@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // MU
-import { Box, Stack, Button, TextField } from '@mui/material';
+import { Box, Stack, Button, TextField, MenuItem, FormControl } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 // Custom styles
 import './ButtonContainer.css';
@@ -15,6 +16,8 @@ export interface ButtonContainerProps {
     setImporterOpen: Function
     setToastOpen: Function,
     setToastMessage: Function,
+    setEnvironmentPath: Function,
+    environmentPath: string,
 }
 
 function ButtonContainer({
@@ -22,7 +25,10 @@ function ButtonContainer({
   defaultDelay, clearAll,
   copyToClipboard, setImporterOpen,
   setToastOpen, setToastMessage,
+  setEnvironmentPath, environmentPath,
 } : ButtonContainerProps) {
+  const [domainList, setDomainList] = useState<string[]>([]);
+
   const handleTestClick = () : void => {
     testSequence();
   };
@@ -43,6 +49,10 @@ function ButtonContainer({
     copyToClipboard();
   };
 
+  const handleSelectChange = (event: SelectChangeEvent) => {
+    setEnvironmentPath(event.target.value as string);
+  };
+
   const handleChange = (e: { target: { value: string; }; }) => {
     const inputValue = parseInt(e.target.value, 10);
     if (inputValue > 90) {
@@ -52,6 +62,14 @@ function ButtonContainer({
       setDefaultDelay(inputValue);
     }
   };
+
+  useEffect(() => {
+    // Sets the list of all hosts available to be loaded as Select items in the dropdown
+    setDomainList(process.env.REACT_APP_SCREENSHOT_PATH
+      ? process.env.REACT_APP_SCREENSHOT_PATH.split(',') : []);
+    // Sets default Path
+    setEnvironmentPath(process.env.REACT_APP_SCREENSHOT_PATH ? process.env.REACT_APP_SCREENSHOT_PATH.split(',')[0] : 'No Path');
+  }, []);
 
   return (
     <div>
@@ -76,6 +94,45 @@ function ButtonContainer({
           <Button variant="contained" color="success" onClick={handleTestClick}>Test</Button>
           <Button variant="contained" color="error" onClick={handleClear}>Clear All</Button>
           <Button variant="outlined" color="secondary" onClick={handleImportClick} className="import-button">Import</Button>
+          <FormControl
+            id="domain-path-select-form"
+            sx={
+              {
+                p: 1,
+                minWidth: 120,
+                maxHeight: 40,
+                backgroundColor: 'white',
+                marginBottom: 0,
+                paddingBottom: 0,
+                border: '1px solid lightgrey',
+                borderRadius: '4px',
+              }
+            }
+            variant="standard"
+            size="medium"
+          >
+            <Select
+              labelId="domain-path-select-label"
+              id="domain-path-select"
+              value={environmentPath}
+              label="Domain Path"
+              variant="standard"
+              onChange={handleSelectChange}
+              disableUnderline
+              sx={{
+                backgroundColor: 'white',
+              }}
+            >
+              { domainList.map((domain: string, index: number) => (
+                <MenuItem
+                  value={domain}
+                  key={index.toString() && domain}
+                >
+                  {domain}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Stack>
       </Box>
     </div>
