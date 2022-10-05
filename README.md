@@ -1,6 +1,7 @@
 # Puppeteer sequence configurator
 
-[Confluence](https://cludosearch.atlassian.net/wiki/home)
+[Configurator](https://customer.cludo.com/assets/async-configurator/)
+[Confluence](https://cludosearch.atlassian.net/wiki/spaces/CX/pages/2758279216/Crawl+behind+login)
 
 Puppeteer sequence configurator is a standalone web app that facilitates the configuration of crawlers that use puppeteersequence as a crawler extension. This is a tool intended for internal use.
 
